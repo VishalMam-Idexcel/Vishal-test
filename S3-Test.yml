@@ -1,0 +1,31 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: CloudFormation template to create an S3 bucket with versioning enabled.
+
+Parameters:
+  BucketName:
+    Description: "The name of the S3 bucket (must be unique across all existing S3 buckets)"
+    Type: String
+    
+Resources:
+  SampleS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref BucketName
+
+  BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref SampleS3Bucket
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal: "*"
+            Action:
+              - "s3:GetObject"
+            Resource: "*"
+
+Outputs:
+  BucketName:
+    Value: !Ref SampleS3Bucket
+    Description: "Name of the created S3 bucket"

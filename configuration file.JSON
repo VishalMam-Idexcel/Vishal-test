@@ -1,8 +1,5 @@
 {
   "Parameters" : {
     "BucketName" : "my-test-bkt"
-  },
-  "Tags" : {
-    "TagKey" : "TagValue"
-  }, 
+  }
 }

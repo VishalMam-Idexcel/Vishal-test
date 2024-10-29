@@ -1,15 +1,8 @@
 {
   "Parameters" : {
-    "BucketName" : "my-test-bkt",
-    ...
+    "BucketName" : "my-test-bkt"
   },
   "Tags" : {
-    "TagKey" : "TagValue",
-    ...
+    "TagKey" : "TagValue"
   }, 
-  "StackPolicy" : {
-    "Statement" : [
-      StackPolicyStatement
-    ]
-  }
 }

@@ -2,4 +2,13 @@
   "Parameters" : {
     "BucketName" : "sample-vishal-bkt"
   }
+  "StackPolicy" : {
+      "Statement" : [
+        {
+          "Effect" : "Allow",
+          "NotAction" : "Update:Delete",
+          "Principal": "*",
+          "Resource" : "*"
+        }
+      ]
 }

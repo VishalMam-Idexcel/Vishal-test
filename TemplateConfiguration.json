@@ -1,6 +1,6 @@
 {
   "Parameters" : {
-    "BucketName" : "sample-vishal-bkt"
+    "BucketName" : "sample-vis-bkt"
   },
   "StackPolicy" : {
     "Statement" : [

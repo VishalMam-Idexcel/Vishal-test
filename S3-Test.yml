@@ -23,7 +23,7 @@ Resources:
               - "s3:GetObject"
               - "s3:PutObject"
               - "s3:DeleteObject"
-            Resource: "arn:aws:s3:::sample-vishal-bkt/*"     
+            Resource: "arn:aws:s3:::sample-vis-bkt/*"     
 Outputs:
   BucketName:
     Value: !Ref BucketName

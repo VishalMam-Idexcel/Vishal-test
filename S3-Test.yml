@@ -11,6 +11,11 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: !Ref BucketName
+      PublicAccessBlockConfiguration: 
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
   SampleS3BucketPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:

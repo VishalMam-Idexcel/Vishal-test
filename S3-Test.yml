@@ -20,7 +20,7 @@ Resources:
           - Effect: Allow
             Principal: "*"
             Action: "s3:GetObject"
-            Resource: "*"     
+            Resource: "arn:aws:s3:::sample-vishal-bkt"     
 Outputs:
   BucketName:
     Value: !Ref BucketName

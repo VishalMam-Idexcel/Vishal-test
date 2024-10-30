@@ -2,6 +2,9 @@
   "Parameters" : {
     "BucketName" : "sample-vis-bkt"
   },
+  "Tags" : {
+    "Owner" : "Vishal"
+  },  
   "StackPolicy" : {
     "Statement" : [
       {

@@ -4,6 +4,14 @@
   },
   "Tags" : {
     "Owner" : "Vishal"
-  }  
+  },
   
-}
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Deny",
+      "Action": "Update:*",
+      "Resource": "*"
+    }
+  ]
+  }

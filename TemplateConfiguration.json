@@ -5,14 +5,5 @@
   "Tags" : {
     "Owner" : "Vishal"
   },  
-  "StackPolicy" : {
-    "Statement" : [
-      {
-        "Effect" : "Deny",
-        "Action" : "Update:*",
-        "Principal": "*",
-        "Resource" : "*"
-      }
-    ]
-}
+  
 }

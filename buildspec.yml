@@ -9,20 +9,19 @@ phases:
       - sed -i 's/..port:/port:/g' wdio.conf.js
       - echo "Displaying details after update"
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
-
+      - REPOSITORY_URI=$TemplateURL
   build:
     commands:
-      - export ECR_REPO_URL="${AWS_ACCOUNT_ID}.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$ECR_REPO_URL"
       - echo Building the Docker image...
       - DATE=$(date +%Y%b%d_%H%M%S)
       - TAG="$Release_ID-$DATE"
       - echo $TAG
-      - docker build -t $ECR_REPO_URL:$TAG .
+      - docker build -t $REPOSITORY_URI:$TAG .
 
   post_build:
     commands:
       - echo Pushing the Docker images...
-      - docker push $ECR_REPO_URL:$TAG
+      - docker push $REPOSITORY_URI:$TAG
       - echo Pushed docker image successfully
       # Fetch the existing task definition
       - echo "Fetching existing task definition..."
@@ -33,9 +32,7 @@ phases:
       - echo "Preparing new task definition..."
       - REPLICATED_TASK_DEF=$(jq 'del(.taskDefinitionArn, .revision, .status, .requiresAttributes, .compatibilities, .registeredAt, .registeredBy)' task-def.json)
       - echo "$REPLICATED_TASK_DEF" > new-task-def.json
-
       # Register the replicated task definition
       - echo "Registering replicated task definition..."
       - NEW_TASK_DEF_ARN=$(aws ecs register-task-definition --cli-input-json "$REPLICATED_TASK_DEF" --query 'taskDefinition.taskDefinitionArn' --output text)
-
       - echo "New replicated task definition registered: $NEW_TASK_DEF_ARN"

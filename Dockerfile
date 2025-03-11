@@ -1,23 +1,24 @@
+# Use Amazon Linux as the base image
 FROM amazonlinux:latest
-RUN yum update
-RUN yum install python -y
-RUN yum install awscli -y
 
-RUN yum install gcc-c++ -y
+# Install Node.js and npm
+RUN yum update -y && \
+    yum install -y nodejs npm
 
-RUN yum install tar -y
-RUN yum install gzip -y
-RUN yum install jq -y
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-RUN chmod +x /root/.nvm/nvm.sh
-RUN . /root/.nvm/nvm.sh && nvm install 18.20.5
-RUN yum install java-1.8.0-amazon-corretto -y
-ENV PATH /root/.nvm/versions/node/v18.20.5/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+# Set the working directory inside the container
+WORKDIR /app
 
-WORKDIR /los-qa-ui-automation
+# Copy package.json and package-lock.json
+COPY package*.json ./
 
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the application files
 COPY . .
 
-RUN chmod +x copy.sh
+# Expose the application port (if needed)
+EXPOSE 3000
 
-RUN . /root/.nvm/nvm.sh && npm install
+# Command to start the application
+CMD ["node", "server.js"]
